@@ -19,8 +19,15 @@ public class HTMLManager {
    }
    
    public String toString() {
-      return tags.toString();
-   
+      String result = "";
+      int size = tags.size();
+      
+      for (int i = 0; i < size; i++) {
+         HTMLTag tag = tags.poll();
+         result += tag.toString().trim() + " ";
+         tags.add(tag);
+      }
+      return result.trim();
    }
    
    public void fixHTML() {
@@ -51,7 +58,7 @@ public class HTMLManager {
       while (!openTags.isEmpty()) {
          fixed.add(openTags.pop().getMatching());
       }
-         
+      
       tags = fixed;
    }
 }
